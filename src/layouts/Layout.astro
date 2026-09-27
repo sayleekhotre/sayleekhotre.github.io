@@ -1,23 +1,102 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import '../styles/global.css';
+import SiteHeader from '../components/SiteHeader.astro';
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+interface Props {
+  title: string;
+  description?: string;
+  /** Home page: enables the intro curtain and in-page nav anchors. */
+  home?: boolean;
+}
+
+const {
+  title,
+  description = 'Saylee Khotre — Senior Product Designer, B2B SaaS.',
+  home = false,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark" data-intro={home ? '' : undefined}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#07070c" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <title>{title}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300..700&family=Space+Mono:wght@400;700&display=swap"
+    />
+
+    <script is:inline>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add('js');
+        try {
+          var t = localStorage.getItem('theme');
+          if (t === 'light' || t === 'dark') d.setAttribute('data-theme', t);
+        } catch (e) {}
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var seen = false;
+        try { seen = sessionStorage.getItem('intro-seen') === '1'; } catch (e) {}
+        if (d.hasAttribute('data-intro') && !reduce && !seen) d.classList.add('intro');
+      })();
+    </script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="progress" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="cursor-light" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"><span class="cursor-label"></span></div>
+    <div class="cursor-dot" aria-hidden="true"></div>
+
+    {
+      home && (
+        <div class="intro" aria-hidden="true">
+          <div class="intro-top">
+            <span>Saylee Khotre</span>
+            <span>Portfolio ©2026</span>
+          </div>
+          <div class="intro-mid">
+            <span class="intro-mark">Saylee</span>
+          </div>
+          <div class="intro-bottom">
+            <span>Product Designer — Pune, IN</span>
+            <span class="intro-count" data-intro-count>000</span>
+          </div>
+          <span class="intro-bar" />
+        </div>
+      )
+    }
+
+    <SiteHeader home={home} />
+
+    <slot />
+
+    <footer class="footer">
+      <div class="wrap footer-row">
+        <p>© 2026 Saylee Khotre</p>
+        <p>Designed with intent · Pune, IN</p>
+        <a href="#top" class="to-top">
+          Back to top
+          <span class="arrow-circle" aria-hidden="true">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 14V2M3 7l5-5 5 5" /></svg>
+          </span>
+        </a>
+      </div>
+    </footer>
+
+    <script>
+      import '../scripts/effects.js';
+    </script>
+  </body>
+</html>

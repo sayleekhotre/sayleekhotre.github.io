@@ -1,0 +1,56 @@
+---
+import Layout from './Layout.astro';
+import CaseStudyMeta from '../components/CaseStudyMeta.astro';
+import CaseStudyNav from '../components/CaseStudyNav.astro';
+import WideFigure from '../components/WideFigure.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Entry {
+  slug: string;
+  title: string;
+}
+
+interface Props {
+  entry: CollectionEntry<'work'>;
+  prev: Entry | null;
+  next: Entry | null;
+}
+
+const { entry, prev, next } = Astro.props;
+const { title, company, role, year, platform, tools, heroImage } = entry.data;
+---
+
+<Layout title={`${title} — Saylee Khotre`} description={entry.data.summary}>
+  <main id="main" class="case">
+    <div class="case-glow" aria-hidden="true"></div>
+
+    <header class="wrap case-head">
+      <a href="/#work" class="back-link reveal">
+        <span class="arrow-circle" aria-hidden="true">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 8H2M7 3L2 8l5 5" /></svg>
+        </span>
+        All work
+      </a>
+      <p class="label reveal" data-d="60">{company}</p>
+      <h1 class="case-title reveal" data-d="120">{title}</h1>
+      <p class="case-summary reveal" data-d="200">{entry.data.summary}</p>
+    </header>
+
+    <div class="wrap reveal" data-d="260">
+      <WideFigure src={heroImage} alt={`Cover image for ${title}`} priority />
+    </div>
+
+    <div class="wrap case-body">
+      <aside class="case-aside reveal">
+        <CaseStudyMeta role={role} year={year} platform={platform} company={company} tools={tools} />
+      </aside>
+      <article class="typeset reveal" data-d="80">
+        <slot />
+      </article>
+    </div>
+
+    <div class="wrap">
+      <CaseStudyNav prev={prev} next={next} />
+    </div>
+  </main>
+</Layout>

@@ -1,0 +1,30 @@
+---
+interface Props {
+  role: string;
+  year: number;
+  platform: 'web' | 'mobile';
+  company: string;
+  tools: string[];
+}
+
+const { role, year, platform, company, tools } = Astro.props;
+
+const fields: Array<{ label: string; value: string }> = [
+  { label: 'Company', value: company },
+  { label: 'Role', value: role },
+  { label: 'Year', value: String(year) },
+  { label: 'Platform', value: platform === 'web' ? 'Web' : 'Mobile' },
+  { label: 'Tools', value: tools.join(', ') },
+];
+---
+
+<dl class="case-meta">
+  {
+    fields.map(({ label, value }) => (
+      <div class="case-meta-field">
+        <dt>{label}</dt>
+        <dd>{value}</dd>
+      </div>
+    ))
+  }
+</dl>

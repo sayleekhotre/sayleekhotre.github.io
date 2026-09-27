@@ -1,0 +1,134 @@
+/* ==========================================================================
+   Case study pages
+   ========================================================================== */
+
+.case { position: relative; padding-top: clamp(130px, 18vh, 180px); padding-bottom: var(--section-y); overflow: clip; }
+.case-glow {
+  position: absolute;
+  top: -240px;
+  left: 50%;
+  width: min(1100px, 140vw);
+  height: 640px;
+  translate: -50% 0;
+  background:
+    radial-gradient(closest-side at 35% 50%, color-mix(in oklab, var(--violet) 26%, transparent), transparent),
+    radial-gradient(closest-side at 70% 45%, color-mix(in oklab, var(--cyan) 16%, transparent), transparent);
+  filter: blur(60px);
+  opacity: calc(var(--blob-opacity) + 0.3);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.case-head { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; margin-bottom: 56px; }
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+  transition: color 0.3s var(--ease);
+}
+.back-link:hover { color: var(--ink); }
+.back-link:hover .arrow-circle { transform: translateX(-4px); border-color: var(--violet); }
+
+.case-title {
+  max-width: 18ch;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(2.8rem, 7vw, 5.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.case-summary { max-width: 60ch; color: var(--ink-mid); font-size: clamp(1rem, 1.4vw, 1.15rem); line-height: 1.75; }
+
+/* Figures */
+.figure { margin: 0; }
+.figure-frame {
+  padding: 8px;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line);
+  background: color-mix(in oklab, var(--surface) 70%, transparent);
+  box-shadow: var(--shadow-lg);
+}
+.figure-frame img {
+  width: 100%;
+  height: auto;
+  border-radius: calc(var(--r-lg) - 8px);
+  display: block;
+}
+.figure figcaption {
+  margin-top: 14px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-mid);
+}
+.figcaption-index { color: var(--violet-hi); margin-right: 4px; }
+
+/* Body: sticky meta + prose */
+.case-body {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: clamp(40px, 7vw, 96px);
+  margin-top: clamp(56px, 8vw, 96px);
+  align-items: start;
+}
+.case-aside { position: sticky; top: 110px; }
+.case-meta {
+  display: grid;
+  gap: 1px;
+  border-radius: var(--r);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--line);
+}
+.case-meta-field { display: grid; gap: 4px; padding: 16px 20px; background: var(--surface); }
+.case-meta dt {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.case-meta dd { font-size: 0.95rem; color: var(--ink); }
+
+/* Prev / next */
+.case-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: clamp(72px, 10vw, 120px);
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+}
+.case-nav-link {
+  --mx: 50%;
+  --my: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 28px 30px;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(360px circle at var(--mx) var(--my), color-mix(in oklab, var(--violet) 12%, transparent), transparent 60%),
+    var(--surface);
+  transition: transform 0.5s var(--spring), border-color 0.3s var(--ease);
+}
+.case-nav-link:hover { transform: translateY(-4px); border-color: color-mix(in oklab, var(--violet) 45%, transparent); }
+.case-nav-link.next { grid-column: 2; text-align: right; align-items: flex-end; }
+.case-nav-dir { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--violet-hi); }
+.case-nav-title { font-family: var(--serif); font-size: clamp(1.5rem, 2.6vw, 2.1rem); line-height: 1.1; letter-spacing: -0.015em; }
+
+@media (max-width: 860px) {
+  .case-body { grid-template-columns: 1fr; }
+  .case-aside { position: static; }
+  .case-meta { grid-template-columns: 1fr 1fr; }
+  .case-nav { grid-template-columns: 1fr; }
+  .case-nav-link.next { grid-column: auto; }
+}

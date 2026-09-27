@@ -1,0 +1,32 @@
+---
+interface Entry {
+  slug: string;
+  title: string;
+}
+
+interface Props {
+  prev: Entry | null;
+  next: Entry | null;
+}
+
+const { prev, next } = Astro.props;
+---
+
+<nav class="case-nav" aria-label="More case studies">
+  {
+    prev && (
+      <a class="case-nav-link prev reveal" href={`/work/${prev.slug}/`} data-spot>
+        <span class="case-nav-dir">← Previous</span>
+        <span class="case-nav-title">{prev.title}</span>
+      </a>
+    )
+  }
+  {
+    next && (
+      <a class="case-nav-link next reveal" href={`/work/${next.slug}/`} data-spot data-d="100">
+        <span class="case-nav-dir">Next →</span>
+        <span class="case-nav-title">{next.title}</span>
+      </a>
+    )
+  }
+</nav>

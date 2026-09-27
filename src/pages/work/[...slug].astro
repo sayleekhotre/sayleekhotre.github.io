@@ -1,0 +1,32 @@
+---
+import { getCollection, render } from 'astro:content';
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+
+const allWork = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+
+export async function getStaticPaths() {
+  const allWork = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+  return allWork.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: (typeof allWork)[number];
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const index = allWork.findIndex((item) => item.id === entry.id);
+const prevEntry = index > 0 ? allWork[index - 1] : null;
+const nextEntry = index < allWork.length - 1 ? allWork[index + 1] : null;
+
+const prev = prevEntry ? { slug: prevEntry.data.slug, title: prevEntry.data.title } : null;
+const next = nextEntry ? { slug: nextEntry.data.slug, title: nextEntry.data.title } : null;
+---
+
+<CaseStudyLayout entry={entry} prev={prev} next={next}>
+  <Content />
+</CaseStudyLayout>
