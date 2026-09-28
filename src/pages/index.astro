@@ -175,7 +175,12 @@ const contacts = [
         <ul class="work-grid">
           {work.map((entry, i) => (
             <li class={`work-item reveal ${i === 0 ? 'is-feature' : ''}`} data-d={String((i % 2) * 120)}>
-              <a href={`/work/${entry.data.slug}/`} class="card" data-tilt data-cursor="View">
+              <a
+                href={entry.data.slug === 'firstcry' ? '/firstcry-case-study.pdf' : `/work/${entry.data.slug}/`}
+                target={entry.data.slug === 'firstcry' ? '_blank' : undefined}
+                rel={entry.data.slug === 'firstcry' ? 'noopener' : undefined}
+                class="card" data-tilt data-cursor="View"
+              >
                 <div class="card-inner">
                   <div class="card-media">
                     <Image
