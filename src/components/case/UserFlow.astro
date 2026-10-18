@@ -1,0 +1,32 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Step {
+  img: ImageMetadata;
+  note?: string;
+}
+
+interface Props {
+  title: string;
+  steps: Step[];
+}
+
+const { title, steps } = Astro.props;
+---
+
+<section class="flow reveal">
+  <h3 class="flow-title">{title}</h3>
+  <ol class="flow-steps">
+    {
+      steps.map((s, i) => (
+        <li class="flow-step">
+          {s.note && <p class="callout"><span class="flow-idx">{String(i + 1).padStart(2, '0')}</span>{s.note}</p>}
+          <div class="phone">
+            <Image src={s.img} alt={s.note ?? `Step ${i + 1}`}widths={[320, 640]} sizes="(max-width: 860px) 60vw, 240px" loading="lazy" />
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</section>

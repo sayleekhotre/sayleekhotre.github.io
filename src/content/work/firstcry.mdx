@@ -2,37 +2,199 @@
 title: 'FirstCry — Where every choice feels crucial'
 slug: 'firstcry'
 year: 2023
-role: 'UI/UX Designer'
+role: 'Solo UX/UI Designer'
 company: 'FirstCry'
 platform: 'mobile'
-summary: 'A UX case study for FirstCry (a FirstCry × Mahindra venture), including a ParentingGPT budgeting flow that helps parents set a budget and get tailored product recommendations.'
-tools: ['Figma']
+summary: 'Scroll Less, Choose Better — a UX case study on helping parents discover, compare and buy the right kids’ products, including a ParentingGPT flow built around size, budget and occasion.'
+tools: ['Figma', 'ChatGPT']
 heroImage: '../../assets/work/firstcry-hero.png'
 order: 1
 featured: true
+variant: 'story'
+pdf: '/firstcry-case-study.pdf'
 ---
 
-import WideFigure from '../../components/WideFigure.astro';
-import hero from '../../assets/work/firstcry-hero.png';
+import StorySection from '../../components/case/StorySection.astro';
+import JourneySteps from '../../components/case/JourneySteps.astro';
+import PhoneGallery from '../../components/case/PhoneGallery.astro';
+import UserFlow from '../../components/case/UserFlow.astro';
+import ComponentsBoard from '../../components/case/ComponentsBoard.astro';
+import Swatches from '../../components/case/Swatches.astro';
+
+import splash from '../../assets/work/firstcry/splash.webp';
+import home from '../../assets/work/firstcry/home.webp';
+import homeGpt from '../../assets/work/firstcry/home-gpt.webp';
+import chatForm from '../../assets/work/firstcry/chat-form.webp';
+import chatSuggest from '../../assets/work/firstcry/chat-suggest.webp';
+import chatReply from '../../assets/work/firstcry/chat-reply.webp';
+import product from '../../assets/work/firstcry/product.webp';
+import tryonCamera from '../../assets/work/firstcry/tryon-camera.webp';
+import tryonA from '../../assets/work/firstcry/tryon-result-a.webp';
+import tryonB from '../../assets/work/firstcry/tryon-result-b.webp';
+import listing from '../../assets/work/firstcry/listing.webp';
 
 {/* TODO: year is a placeholder (2023) — confirm the real project year. */}
 
-### The problem
+<StorySection num="01" title="Project *overview*">
+  <p class="lead">FirstCry, an e-commerce platform for kids’ clothing, essentials, and accessories. It’s designed for users who often shop with curiosity to buy and in search for the right size, age-fit, or occasion-specific products.</p>
 
-TODO — one or two paragraphs on the business problem FirstCry was facing and
-why it mattered enough to staff a designer against it.
+  <ul class="points">
+    <li>Help parents quickly discover, compare, and buy the right products without feeling overwhelmed.</li>
+    <li>Shopping for kids is often time-sensitive and emotionally driven.</li>
+    <li>Improving how users discover and decide on products, by restructuring categories.</li>
+    <li>Creating interactive moments like “View Similar” or GPT-driven suggestions.</li>
+  </ul>
+</StorySection>
 
-<WideFigure
-  src={hero}
-  alt="FirstCry mobile app screens, including a ParentingGPT budget-setting flow"
-  caption="FirstCry case study cover and ParentingGPT budget flow."
-/>
+<StorySection num="02" title="Understanding design *problem*">
+  <p>The users know they need to buy full attire, but have no clarity.</p>
+  <p><em>Will customized size, color experience make user buy the product?</em></p>
+  <p>For appearance-conscious users, often led to returns with the reason <strong>“didn’t look good on me.”</strong> So here the design opportunity was to shape:</p>
 
-### The approach
+  <ul class="points">
+    <li>The platform lacks clear categorization and decision cues, making discovery confusing.</li>
+    <li>Repeated searching and unclear filters.</li>
+    <li>Product categories like essentials, beauty, or add-ons don’t align well with age-based filters, causing misdirection.</li>
+  </ul>
+</StorySection>
 
-TODO — process, constraints, who you partnered with, what you tried that
-didn't work.
+<StorySection num="03" title="Solution as a *journey*">
+  <JourneySteps
+    steps={[
+      { caption: 'First User opens the app', screen: 'Splash Screen', img: splash },
+      { caption: 'Then he opens the Homepage', screen: 'Home Page', goal: 'User want to buy a complete set of outfit for her child quickly and easily without having to worry about fit, styling, or buying something I’ve already purchased.', img: home },
+      { caption: 'Then he opens the Homepage', screen: 'Home Page', goal: 'User finds a suggestion based customized outfits and want to see if she finds it in her budget', img: homeGpt },
+      { caption: 'Now user opens Parenting GPT', screen: 'Chat Assistant Page', goal: 'User finds a suggestion based customized outfits and want to see if she finds it in her budget', img: chatForm },
+      { caption: 'User gets suggestions for the outfits using the customized text input given', screen: 'Chat Assistant Page', goal: 'User want to see more options based on customized inputs given', img: chatSuggest },
+      { caption: 'User opens the suggested outfit by clicking view details', screen: 'Product Detail Page', img: product },
+      { caption: 'User see the outfit how it looks so clicks on Try On to open the camera', screen: 'Product Detail Page 1', goal: 'User want to see if the outfit fit the kid the color suits or not', img: tryonCamera },
+      { caption: 'User checks the outfit how it looks so clicks on Try On to open the camera', screen: 'Product Detail Page 2', goal: 'User opens the camera and want to see if another style fits looks good or does it fit loose', img: tryonB },
+      { caption: 'User likes the outfit and adds to the cart', screen: 'Product Detail Page 4', goal: 'User want to buy the outfit', img: tryonA },
+    ]}
+  />
+</StorySection>
 
-### The outcome
+<StorySection num="04" title="Decision *story*">
+  <p class="lead">Why I made occasion-based shopping when users were struggling to search options when needed?</p>
+  <p>What user felt stuck when they had to scroll through multiple listings just to find something for my kid suitable for an event. That’s when I knew the design wasn’t supporting users’ goals.</p>
 
-TODO — quantified impact, and what shipped versus what's still in flight.
+  <PhoneGallery
+    callouts
+    cols={2}
+    items={[
+      { img: homeGpt, tag: 'Before', caption: 'Lots of scrolling. Category-Based Filtering made user think which category is based on occasion' },
+      { img: chatReply, tag: 'Before', caption: 'Redirects to articles instead of offering product suggestions.' },
+    ]}
+  />
+  <PhoneGallery
+    callouts
+    cols={2}
+    items={[
+      { img: chatForm, tag: 'After', caption: 'Made easy way out giving freedom to find customized outfit.' },
+      { img: chatSuggest, tag: 'After', caption: 'Suggested outfits' },
+    ]}
+  />
+</StorySection>
+
+<StorySection num="05" title="Rethinking the *chat flow*">
+  <ul class="points">
+    <li>Rethought a chat assistant scenario with size, budget and occasion based filters.</li>
+    <li>Tested the new flow and found users selecting an occasion filter within seconds.</li>
+  </ul>
+
+  <UserFlow
+    title="User Story: Neha wants to shop through discounted brand sale"
+    steps={[
+      { img: home, note: 'Neha wants to buy a party wear where she sees the big brand sale card' },
+      { img: listing, note: 'Here neha sees some frequently bought options, and the trending one. So while scrolling she sees top rated outfit and she likes and opens' },
+      { img: product },
+      { img: tryonCamera },
+    ]}
+  />
+
+  <UserFlow
+    title="User Story: Here neha wants to quick shop within the budget and size"
+    steps={[
+      { img: homeGpt, note: 'Neha is confused about the size and wants to buy a party wear which is in her budget' },
+      { img: chatForm, note: 'She can also select occasions according to the outfit. So once she enters her requirement she finds the outfit budget and size can be entered' },
+      { img: chatSuggest, note: 'She likes the outfit suggestions and the budget suggested' },
+      { img: product, note: 'She can see there is tryon option and check how the outfit looks' },
+      { img: tryonCamera, note: 'Now she sees she can open the camera or upload a photo' },
+      { img: tryonB, note: 'She can see the suggested styles based on her search listed' },
+      { img: tryonA, note: 'Neha sees here that she can even select the size and a detailed size chart for it' },
+    ]}
+  />
+</StorySection>
+
+<StorySection num="06" title="UI + Tool *skills*">
+  <h3 class="mini-title">Font used</h3>
+  <p><strong>Inter</strong> font is a elegant and modern sans serif font. It is very neat and clean. It have more readability and variety of options. That’s why I used this font.</p>
+
+  <div class="specimen">
+    <div class="specimen-aa" aria-hidden="true">Inter</div>
+    <div class="specimen-alpha">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />abcdefghijklmnopqrstuvwxyz<br />1234567890</div>
+    <div class="specimen-weights">
+      <span style="font-weight:700">Inter Bold</span>
+      <span style="font-weight:500">Inter Medium</span>
+      <span style="font-weight:400">Inter Regular</span>
+      <span style="font-weight:300">Inter Light</span>
+    </div>
+  </div>
+
+  <h3 class="mini-title">Color used</h3>
+  <Swatches
+    colors={[
+      { name: 'Primary Color', hex: '#FF6B35' },
+      { name: 'Secondary Color', hex: '#FFF0EA' },
+      { name: 'Text Color', hex: '#1E1E1E' },
+      { name: 'Text Color', hex: '#595959' },
+      { name: 'BG Color', hex: '#F3F3F3' },
+    ]}
+  />
+
+  <h3 class="mini-title">Components</h3>
+  <ComponentsBoard />
+</StorySection>
+
+<StorySection num="07" title="Final *screens*">
+  <PhoneGallery
+    cols={4}
+    items={[
+      { img: home, caption: 'Home' },
+      { img: listing, caption: 'Listing' },
+      { img: chatForm, caption: 'ParentingGPT' },
+      { img: chatSuggest, caption: 'Suggested outfits' },
+      { img: product, caption: 'Product detail' },
+      { img: tryonCamera, caption: 'Try On camera' },
+      { img: tryonB, caption: 'Try On result' },
+      { img: tryonA, caption: 'Size & add to cart' },
+    ]}
+  />
+</StorySection>
+
+<StorySection num="08" title="Key *learnings*">
+  <ul class="cards">
+    <li><p>I used to jump into screens, but now I understand that clear thinking about categories, flows, and user goals should come before design.</p></li>
+    <li><p>Something as small as a missing size chart created uncertainty that led to drop-offs. Micro-decisions like these matter deeply to users</p></li>
+    <li><p>Features like “View Similar” or “Try On” sound great, but their value only comes through when placed where and when the user actually needs them.</p></li>
+    <li><p>Sharing wireframes with peers helped me identify structural issues I would have missed on my own. It saved effort later in UI stages</p></li>
+    <li><p>I stopped chasing perfect screens and started focusing on solving small but meaningful user problems with clarity</p></li>
+    <li><p>I learned to prioritize what users need most at each stage. Adding multiple categorization types without harmony made the experience chaotic</p></li>
+  </ul>
+</StorySection>
+
+<StorySection num="09" title="Future *scope*">
+  <blockquote>
+    <p>When I started this project, I was focused on making clean and useful screens. But as I spent more time with real parents and saw how they actually shopped, something shifted.</p>
+    <p>What I’ll take with me into my next project is this: people don’t come to a product looking for features. They come with a question, a doubt, or a deadline. If I can stay focused on that, I know I’ll be designing something that actually helps.</p>
+  </blockquote>
+</StorySection>
+
+<StorySection num="10" title="Thank you for your *time* :)">
+  <p class="lead">I’d love to hear your thoughts. What worked? What felt unclear?</p>
+  <p>Let’s Connect at <a href="mailto:sayleekhotre@gmail.com">sayleekhotre@gmail.com</a></p>
+  <div class="story-cta">
+    <a class="btn btn-primary" href="mailto:sayleekhotre@gmail.com">Let’s connect</a>
+    <a class="btn btn-ghost" href="/firstcry-case-study.pdf" target="_blank" rel="noopener">Download PDF</a>
+  </div>
+</StorySection>

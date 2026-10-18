@@ -1,0 +1,24 @@
+---
+interface Swatch {
+  name: string;
+  hex: string;
+}
+
+interface Props {
+  colors: Swatch[];
+}
+
+const { colors } = Astro.props;
+---
+
+<ul class="swatches">
+  {
+    colors.map((c) => (
+      <li class="swatch">
+        <span class="swatch-chip" style={`background:${c.hex}`} aria-hidden="true" />
+        <span class="swatch-name">{c.name}</span>
+        <code>{c.hex}</code>
+      </li>
+    ))
+  }
+</ul>

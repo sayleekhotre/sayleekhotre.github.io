@@ -16,6 +16,8 @@ const work = defineCollection({
       heroImage: image(),
       order: z.number().int(),
       featured: z.boolean().default(false),
+      variant: z.enum(['default', 'story']).default('default'),
+      pdf: z.string().optional(),
     }),
 });
 

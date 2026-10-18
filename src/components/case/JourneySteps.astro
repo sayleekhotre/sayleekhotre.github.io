@@ -1,0 +1,40 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Step {
+  caption: string; // what the user does, as written in the case study
+  screen: string; // screen name
+  goal?: string; // "User Goal" callout
+  img?: ImageMetadata;
+}
+
+interface Props {
+  steps: Step[];
+}
+
+const { steps } = Astro.props;
+---
+
+<ol class="journey">
+  {
+    steps.map((s, i) => (
+      <li class="journey-step reveal">
+        <div class="phone">
+          {s.img && <Image src={s.img} alt={`${s.screen} screen`} widths={[320, 640]} sizes="(max-width: 860px) 70vw, 280px" loading="lazy" />}
+        </div>
+        <div class="journey-copy">
+          <span class="journey-idx">{String(i + 1).padStart(2, '0')}</span>
+          <h3>{s.caption}</h3>
+          <span class="screen-pill">{s.screen}</span>
+          {s.goal && (
+            <div class="goal">
+              <span class="goal-label">User goal</span>
+              <p>{s.goal}</p>
+            </div>
+          )}
+        </div>
+      </li>
+    ))
+  }
+</ol>

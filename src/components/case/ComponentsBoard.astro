@@ -1,0 +1,38 @@
+---
+import { Image } from 'astro:assets';
+import skirt from '../../assets/work/firstcry/card-skirt.webp';
+import blue from '../../assets/work/firstcry/card-dress-blue.webp';
+import purple from '../../assets/work/firstcry/card-dress-purple.webp';
+
+const chips = ['Birthday Party', 'Wedding', 'Holiday', 'Special Event'];
+const cards = [
+  { img: skirt, title: 'Top & Coordinating Skirt Set', sub: 'The Magic Wand Cotton Sleeveless Bandhani Printed Top & Coordinating Skirt Set - Fuchsia' },
+  { img: blue, title: 'Floral Frock', sub: 'Many frocks & Net Sleeveless Flower Applique & Frill Detailed Dress - Blue' },
+  { img: purple, title: 'Sequin Dress', sub: 'Rassna Sleeveless Sequin Embellished Bow Detailed Dress - Purple' },
+];
+---
+
+<div class="board" aria-label="UI components used in the design">
+  <div class="board-row">
+    {chips.map((c, i) => <span class={`chip${i === 0 ? ' is-on' : ''}`}>{c}</span>)}
+  </div>
+  <div class="board-row">
+    <span class="fc-btn">Take a photo</span>
+    <span class="fc-tryon">Try-On</span>
+    <span class="fc-nav" aria-hidden="true">
+      <i class="on">Shopping</i><i>Explore</i><i>Parenting</i>
+    </span>
+  </div>
+  <ul class="board-cards">
+    {
+      cards.map((c) => (
+        <li class="fc-card">
+          <Image src={c.img} alt={c.title} widths={[240, 480]} sizes="240px" loading="lazy" />
+          <strong>{c.title}</strong>
+          <small>{c.sub}</small>
+          <div class="fc-card-foot"><span>₹ 499</span><span class="fc-btn sm">View Details</span></div>
+        </li>
+      ))
+    }
+  </ul>
+</div>

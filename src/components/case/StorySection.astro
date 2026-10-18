@@ -1,0 +1,22 @@
+---
+interface Props {
+  num: string;
+  title: string; // wrap one word in *asterisks* to apply the aurora accent
+  id?: string;
+}
+
+const { num, title, id } = Astro.props;
+const parts = title.split(/\*(.+?)\*/g);
+---
+
+<section class="story-section" id={id}>
+  <header class="story-head reveal">
+    <span class="story-num" aria-hidden="true">{num}</span>
+    <h2 class="story-title">
+      {parts.map((p, i) => (i % 2 ? <em>{p}</em> : p))}
+    </h2>
+  </header>
+  <div class="story-content">
+    <slot />
+  </div>
+</section>

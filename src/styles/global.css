@@ -2,6 +2,7 @@
 @import "./home.css";
 @import "./case.css";
 @import "./typeset.css";
+@import "./story.css";
 
 /* ==========================================================================
    Tokens — see DESIGN.md. Dark ("Nocturne") is the default theme.

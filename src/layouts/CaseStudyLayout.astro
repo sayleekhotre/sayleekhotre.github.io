@@ -17,7 +17,8 @@ interface Props {
 }
 
 const { entry, prev, next } = Astro.props;
-const { title, company, role, year, platform, tools, heroImage } = entry.data;
+const { title, company, role, year, platform, tools, heroImage, variant, pdf } = entry.data;
+const story = variant === 'story';
 ---
 
 <Layout title={`${title} — Saylee Khotre`} description={entry.data.summary}>
@@ -40,14 +41,32 @@ const { title, company, role, year, platform, tools, heroImage } = entry.data;
       <WideFigure src={heroImage} alt={`Cover image for ${title}`} priority />
     </div>
 
-    <div class="wrap case-body">
-      <aside class="case-aside reveal">
-        <CaseStudyMeta role={role} year={year} platform={platform} company={company} tools={tools} />
-      </aside>
-      <article class="typeset reveal" data-d="80">
-        <slot />
-      </article>
-    </div>
+    {
+      story ? (
+        <div class="wrap case-story">
+          <div class="case-aside reveal">
+            <CaseStudyMeta role={role} year={year} platform={platform} company={company} tools={tools} />
+          </div>
+          {pdf && (
+            <a href={pdf} target="_blank" rel="noopener" class="btn btn-ghost story-pdf">
+              Download PDF version
+            </a>
+          )}
+          <article class="story">
+            <slot />
+          </article>
+        </div>
+      ) : (
+        <div class="wrap case-body">
+          <aside class="case-aside reveal">
+            <CaseStudyMeta role={role} year={year} platform={platform} company={company} tools={tools} />
+          </aside>
+          <article class="typeset reveal" data-d="80">
+            <slot />
+          </article>
+        </div>
+      )
+    }
 
     <div class="wrap">
       <CaseStudyNav prev={prev} next={next} />
